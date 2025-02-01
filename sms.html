@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gehan Num Verification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #a6c0fe, #fbc2eb);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .container {
+            background-color: white;
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #007BFF;
+            border-radius: 8px;
+            background-color: #f8f8f8;
+            color: #333;
+            margin-top: 5px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #0056b3;
+            background-color: #ffffff;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button img {
+            width: 18px;
+            height: 18px;
+        }
+
+        .loading {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .footer {
+            margin-top: 20px;
+            color: #777;
+        }
+
+        .footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Gehan Num Verification</h2>
+        <p>Verify your phone number by entering the number below.</p>
+
+        <form id="verificationForm">
+            <div class="form-group">
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required>
+            </div>
+            <button type="submit" id="verifyButton">
+                <i class="fab fa-telegram-plane"></i> Verify Number
+            </button>
+        </form>
+
+        <div class="footer">
+            <p>By verifying, you agree to our <a href="#">Terms & Conditions</a>.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('verificationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let phoneNumber = document.getElementById('phoneNumber').value;
+            let verifyButton = document.getElementById('verifyButton');
+
+            if (phoneNumber) {
+                verifyButton.innerHTML = '<div class="loading"></div> Verifying...';
+
+                setTimeout(function() {
+                    verifyButton.innerHTML = '<i class="fab fa-telegram-plane"></i> Get Verification Code';
+
+                    sendNotification();
+
+                    // Redirect to verification_success.html after a delay (optional)
+                    setTimeout(function() {
+                        window.location.href = "verification_success.html";
+                    }, 500); // Adjust as needed
+                }, 2000);
+            } else {
+                alert("Please enter a valid phone number.");
+            }
+        });
+
+        function sendNotification() {
+            // Check if Notification permission is granted
+            if (Notification.permission === "granted") {
+                const verificationCode = Math.floor(100000 + Math.random() * 900000); // Generate random code
+                const notification = new Notification("Gehan Sms Verification Code", {
+                    body: "Your verification code is: " + verificationCode,
+                    icon: "https://www.iconfinder.com/icons/3810248/message_sms_text_icon",
+                });
+
+                // Store the verification code in localStorage (you can use it later for validation)
+                localStorage.setItem('verificationCode', verificationCode);
+            } else if (Notification.permission !== "denied") {
+                // Request permission if it's not denied
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        sendNotification(); // Recursively call sendNotification if permission is granted
+                    }
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>
+
