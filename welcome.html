@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Number Verified</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+            background: linear-gradient(to bottom right, #ffffff, #2196F3, #4CAF50); /* White, Blue, Green Gradient */
+            animation: gradientAnimation 5s infinite alternate;
+        }
+
+        /* Live Gradient Animation */
+        @keyframes gradientAnimation {
+            0% {
+                background: linear-gradient(to bottom right, #ffffff, #2196F3, #4CAF50);
+            }
+            50% {
+                background: linear-gradient(to top left, #4CAF50, #ffffff, #2196F3);
+            }
+            100% {
+                background: linear-gradient(to bottom right, #2196F3, #4CAF50, #ffffff);
+            }
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.8); /* Transparent white background */
+            border-radius: 15px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+            width: 350px;
+            animation: containerGradient 5s infinite alternate;
+        }
+
+        @keyframes containerGradient {
+            0% {
+                background: rgba(255, 255, 255, 0.8); /* Default white */
+            }
+            50% {
+                background: rgba(255, 255, 255, 0.6); /* Lighter opacity */
+            }
+            100% {
+                background: rgba(255, 255, 255, 0.8); /* Default white */
+            }
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .tick-mark {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 30px;
+            padding: 15px;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            box-shadow: 0 0 10px #4CAF50;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        /* Glowing effect for the tick mark */
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+            }
+            to {
+                box-shadow: 0 0 25px rgba(76, 175, 80, 1);
+            }
+        }
+
+        .footer {
+            font-size: 14px;
+            color: #777;
+        }
+
+        /* Fade-in effect for the container */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="tick-mark">&#10003;</div> <!-- Tick mark inside a circle -->
+        <h2>Your Number is Successfully Verified</h2>
+        <p>You can now continue to the next step.</p>
+        <div class="footer">
+            <p>Redirecting to the next page...</p>
+        </div>
+    </div>
+
+    <script>
+        // Auto redirect after 6 seconds
+        setTimeout(function() {
+            window.location.href = "free_sms.html";
+        }, 6000); // 6 seconds
+    </script>
+
+</body>
+</html>
